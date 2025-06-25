@@ -7,12 +7,12 @@ export default function Hero() {
     <section className="relative w-full h-[60vh] md:h-[80vh] flex items-center justify-center text-center text-white overflow-hidden">
       <div className="absolute inset-0 bg-primary/30 z-10" />
       <Image
-        src="https://placehold.co/1800x1200.png"
-        alt="A vibrant spread of spices on a coastal background"
+        src="https://storage.googleapis.com/maker-studio-project-images-prod/v1-36451631520-a81d4a04-5e19-4841-be2d-5b32185b31e9.jpg"
+        alt="A vibrant spread of coastal spices and Swahili foods, representing a rich tradition of flavor"
         fill
         className="object-cover"
         priority
-        data-ai-hint="coastal spices"
+        data-ai-hint="swahili food"
       />
       <div className="relative z-20 container px-4 md:px-6">
         <div className="max-w-3xl mx-auto space-y-4">

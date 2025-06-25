@@ -25,7 +25,7 @@ export default function Header() {
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <Logo />
             <span className="hidden font-bold sm:inline-block font-headline">
-              Spice Coast
+              Mabuyu Treats
             </span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
@@ -48,7 +48,7 @@ export default function Header() {
             <Link href="/" className="flex items-center space-x-2">
               <Logo />
               <span className="font-bold font-headline">
-                Spice Coast
+                Mabuyu Treats
               </span>
             </Link>
           </div>

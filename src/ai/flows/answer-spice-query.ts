@@ -31,7 +31,7 @@ const prompt = ai.definePrompt({
   name: 'answerSpiceQueryPrompt',
   input: {schema: AnswerSpiceQueryInputSchema},
   output: {schema: AnswerSpiceQueryOutputSchema},
-  prompt: `You are a helpful AI chatbot for a spice company called Spice Coast.
+  prompt: `You are a helpful AI chatbot for a company called Mabuyu Treats.
 
   Answer the following question about the ingredients, spice levels, and usage suggestions for different products:
 

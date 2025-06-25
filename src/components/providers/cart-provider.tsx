@@ -21,14 +21,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const { toast } = useToast();
 
   useEffect(() => {
-    const savedCart = localStorage.getItem('spice-coast-cart');
+    const savedCart = localStorage.getItem('mabuyu-treats-cart');
     if (savedCart) {
       setCartItems(JSON.parse(savedCart));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('spice-coast-cart', JSON.stringify(cartItems));
+    localStorage.setItem('mabuyu-treats-cart', JSON.stringify(cartItems));
   }, [cartItems]);
 
   const addToCart = (product: Product, quantity: number = 1) => {

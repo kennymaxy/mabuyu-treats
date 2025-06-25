@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container mx-auto py-8 px-4 md:px-6">
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <p className="text-sm text-secondary-foreground">
-            &copy; {new Date().getFullYear()} Spice Coast. All rights reserved.
+            &copy; {new Date().getFullYear()} Mabuyu Treats. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <Link href="#" aria-label="Twitter">

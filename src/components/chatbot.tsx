@@ -21,7 +21,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "Hello! I'm the Spice Coast assistant. How can I help you with our products today?",
+      text: "Hello! I'm the Mabuyu Treats assistant. How can I help you with our products today?",
       sender: 'bot',
     },
   ]);
@@ -88,7 +88,7 @@ export default function Chatbot() {
       </SheetTrigger>
       <SheetContent className="flex flex-col p-0">
         <SheetHeader className="p-4 border-b">
-          <SheetTitle>Spice Coast Assistant</SheetTitle>
+          <SheetTitle>Mabuyu Treats Assistant</SheetTitle>
         </SheetHeader>
         <ScrollArea className="flex-1" ref={scrollAreaRef}>
           <div className="p-4 space-y-4">

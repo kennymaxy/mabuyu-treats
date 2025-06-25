@@ -7,7 +7,7 @@ import { CartProvider } from '@/components/providers/cart-provider';
 import Chatbot from '@/components/chatbot';
 
 export const metadata: Metadata = {
-  title: 'Spice Coast',
+  title: 'Mabuyu Treats',
   description: 'Exotic spices and flavors from the coast.',
 };
 

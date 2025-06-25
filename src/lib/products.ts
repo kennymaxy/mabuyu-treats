@@ -47,7 +47,7 @@ export const products: Product[] = [
     description:
       'Creamy, rich, and utterly delicious butter made from stone-ground roasted cashews. A hint of sea salt makes it the perfect spread for toast, fruit, or just a spoonful.',
     price: 10.99,
-    image: 'https://placehold.co/600x600.png',
+    image: 'https://storage.googleapis.com/maker-studio-project-images-prod/v1-36451631520-2c70a92d-f952-4dd1-a20b-04470d9a6c9d.jpg',
     imageHint: 'cashew butter',
     ingredients: ['Roasted Cashews', 'Sea Salt'],
     origin: 'East Africa',

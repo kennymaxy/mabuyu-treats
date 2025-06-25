@@ -14,6 +14,7 @@ export default function ProductList() {
             <ProductCard 
               key={product.id} 
               product={product}
+              priority={index < 4}
               style={{ animationDelay: `${index * 100}ms` }}
               className="fade-in"
             />

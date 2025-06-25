@@ -11,9 +11,10 @@ import React from 'react';
 
 interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   product: Product;
+  priority?: boolean;
 }
 
-export default function ProductCard({ product, ...props }: ProductCardProps) {
+export default function ProductCard({ product, priority = false, ...props }: ProductCardProps) {
   const { addToCart } = useCart();
 
   return (
@@ -27,6 +28,7 @@ export default function ProductCard({ product, ...props }: ProductCardProps) {
             height={600}
             className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105"
             data-ai-hint={product.imageHint}
+            priority={priority}
           />
         </div>
         <CardHeader>

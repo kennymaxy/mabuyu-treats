@@ -31,6 +31,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           fill
           className="object-cover"
           priority
+          data-ai-hint={product.imageHint}
         />
         <div className="absolute inset-0 bg-black/40" />
       </section>

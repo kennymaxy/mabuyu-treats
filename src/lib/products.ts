@@ -8,7 +8,7 @@ export const products: Product[] = [
     description:
       'A sweet and tangy candy made from the seeds of the baobab fruit, coated in a vibrant, sugary layer. A beloved coastal delicacy, perfect for a burst of tropical flavor.',
     price: 5.99,
-    image: 'https://placehold.co/600x600.png',
+    image: 'https://storage.googleapis.com/maker-studio-project-images-prod/v1-36451631520-4155a305-a83d-4c32-b7a6-68b3231f2371.jpg',
     imageHint: 'baobab candy',
     ingredients: ['Baobab Seeds', 'Sugar', 'Food Coloring', 'Cardamom', 'Chili Powder (optional)'],
     origin: 'Coastal Kenya',

@@ -23,7 +23,7 @@ const lato = Lato({
 
 export const metadata: Metadata = {
   title: 'Mabuyu Treats - Authentic Coastal Delights',
-  description: 'Savor the authentic flavors of the coast. Handcrafted spices and delicacies delivered to you.',
+  description: 'Savor the unique flavors of our handcrafted Mabuyu, Korosho, and more!',
 };
 
 export default function RootLayout({

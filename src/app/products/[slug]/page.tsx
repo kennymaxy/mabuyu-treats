@@ -24,10 +24,14 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
   return (
     <div className="fade-in">
-      <section 
-        className="relative h-80 bg-cover bg-fixed bg-center"
-        style={{ backgroundImage: `url(${product.image})` }}
-      >
+      <section className="relative h-80">
+        <Image
+          src={product.image}
+          alt={`${product.name} background`}
+          fill
+          className="object-cover"
+          priority
+        />
         <div className="absolute inset-0 bg-black/40" />
       </section>
 

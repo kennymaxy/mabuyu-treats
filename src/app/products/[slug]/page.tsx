@@ -57,7 +57,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 {product.name}
               </h1>
               <div className="mt-4 flex items-center gap-4">
-                <p className="text-3xl font-bold text-primary">${product.price.toFixed(2)}</p>
+                <p className="text-3xl font-bold text-primary">Ksh {product.price.toFixed(2)}</p>
                 <Badge variant={product.spiceLevel === 'Hot' ? 'destructive' : 'secondary'}>
                   {product.spiceLevel} Spice
                 </Badge>

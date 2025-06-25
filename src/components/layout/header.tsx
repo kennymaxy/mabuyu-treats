@@ -84,7 +84,7 @@ export default function Header() {
                                 <h3>
                                   <Link href={`/products/${item.product.slug}`}>{item.product.name}</Link>
                                 </h3>
-                                <p className="ml-4">${(item.product.price * item.quantity).toFixed(2)}</p>
+                                <p className="ml-4">Ksh {(item.product.price * item.quantity).toFixed(2)}</p>
                               </div>
                             </div>
                             <div className="flex flex-1 items-end justify-between text-sm">
@@ -117,7 +117,7 @@ export default function Header() {
                   <div className="border-t border-border px-4 py-6 sm:px-6">
                     <div className="flex justify-between text-base font-medium text-foreground">
                       <p>Subtotal</p>
-                      <p>${cartTotal.toFixed(2)}</p>
+                      <p>Ksh {cartTotal.toFixed(2)}</p>
                     </div>
                     <p className="mt-0.5 text-sm text-muted-foreground">Shipping and taxes calculated at checkout.</p>
                     <div className="mt-6">

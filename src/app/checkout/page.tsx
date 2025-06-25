@@ -18,7 +18,7 @@ export default function CheckoutPage() {
     router.push('/checkout/success');
   };
   
-  const shippingCost = 5.00;
+  const shippingCost = 500.00;
   const tax = cartTotal * 0.08;
   const total = cartTotal + shippingCost + tax;
 
@@ -92,15 +92,15 @@ export default function CheckoutPage() {
                         <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
                       </div>
                     </div>
-                    <p className="font-medium">${(item.product.price * item.quantity).toFixed(2)}</p>
+                    <p className="font-medium">Ksh {(item.product.price * item.quantity).toFixed(2)}</p>
                   </li>
                 ))}
               </ul>
               <div className="mt-6 border-t pt-6 space-y-2">
-                <div className="flex justify-between"><span>Subtotal</span><span>${cartTotal.toFixed(2)}</span></div>
-                <div className="flex justify-between text-muted-foreground"><span>Shipping</span><span>${shippingCost.toFixed(2)}</span></div>
-                <div className="flex justify-between text-muted-foreground"><span>Taxes</span><span>${tax.toFixed(2)}</span></div>
-                <div className="flex justify-between font-bold text-lg border-t pt-2 mt-2"><span>Total</span><span>${total.toFixed(2)}</span></div>
+                <div className="flex justify-between"><span>Subtotal</span><span>Ksh {cartTotal.toFixed(2)}</span></div>
+                <div className="flex justify-between text-muted-foreground"><span>Shipping</span><span>Ksh {shippingCost.toFixed(2)}</span></div>
+                <div className="flex justify-between text-muted-foreground"><span>Taxes</span><span>Ksh {tax.toFixed(2)}</span></div>
+                <div className="flex justify-between font-bold text-lg border-t pt-2 mt-2"><span>Total</span><span>Ksh {total.toFixed(2)}</span></div>
               </div>
             </CardContent>
             <CardFooter>

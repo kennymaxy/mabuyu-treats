@@ -7,7 +7,7 @@ export default function Hero() {
     <section className="relative w-full h-[60vh] md:h-[80vh] flex items-center justify-center text-center text-white overflow-hidden">
       <div className="absolute inset-0 bg-primary/30 z-10" />
       <Image
-        src="https://storage.googleapis.com/maker-studio-project-images-prod/v1-36451631520-a81d4a04-5e19-4841-be2d-5b32185b31e9.jpg"
+        src="https://placehold.co/1200x800.png"
         alt="A vibrant spread of coastal spices and Swahili foods, representing a rich tradition of flavor"
         fill
         className="object-cover"

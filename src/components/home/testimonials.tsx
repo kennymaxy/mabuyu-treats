@@ -14,7 +14,7 @@ const testimonials = [
     avatar: 'NA',
     image: 'https://placehold.co/100x100.png',
     title: 'A Taste of Home',
-    review: "Spice Coast's Achari blend transported me right back to my grandmother's kitchen. It's authentic, aromatic, and has elevated my cooking immensely.",
+    review: "Mabuyu Treats' Achari blend transported me right back to my grandmother's kitchen. It's authentic, aromatic, and has elevated my cooking immensely.",
   },
   {
     name: 'Cherono T.',
@@ -30,8 +30,8 @@ export default function Testimonials() {
     <section className="bg-secondary py-12 sm:py-16 lg:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold font-headline sm:text-4xl">What Our Customers Say</h2>
-          <p className="mt-4 text-lg text-muted-foreground">Stories of flavor from kitchens like yours.</p>
+          <h2 className="text-3xl font-bold font-headline sm:text-4xl">From Our Coastal Community</h2>
+          <p className="mt-4 text-lg text-muted-foreground">Hear what people are saying about our authentic flavors.</p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {testimonials.map((testimonial, index) => (

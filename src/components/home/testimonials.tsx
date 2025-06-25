@@ -3,22 +3,22 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 const testimonials = [
   {
-    name: 'Aisha J.',
-    avatar: 'AJ',
+    name: 'Wanjiku K.',
+    avatar: 'WK',
     image: 'https://placehold.co/100x100.png',
     title: 'Incredible Flavors!',
     review: "The Tasty Korosho is my new addiction! I've never tasted cashews this good. The spice level is perfect and the quality is outstanding. Will be ordering again!",
   },
   {
-    name: 'Ben Carter',
-    avatar: 'BC',
+    name: 'Nasra A.',
+    avatar: 'NA',
     image: 'https://placehold.co/100x100.png',
     title: 'A Taste of Home',
     review: "Spice Coast's Achari blend transported me right back to my grandmother's kitchen. It's authentic, aromatic, and has elevated my cooking immensely.",
   },
   {
-    name: 'Maria Rodriguez',
-    avatar: 'MR',
+    name: 'Cherono T.',
+    avatar: 'CT',
     image: 'https://placehold.co/100x100.png',
     title: 'Absolutely Delicious',
     review: "The Korosho Butter is divine. It's so creamy and has just the right amount of salt. I put it on everything from toast to apple slices. Highly recommend!",

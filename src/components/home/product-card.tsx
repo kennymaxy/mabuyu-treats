@@ -31,11 +31,15 @@ export default function ProductCard({ product, priority = false, ...props }: Pro
             priority={priority}
           />
         </div>
-        <CardHeader>
-          <CardTitle className="font-headline text-xl">{product.name}</CardTitle>
-          <CardDescription className="h-10">{product.description.substring(0, 60)}...</CardDescription>
-        </CardHeader>
       </Link>
+      <CardHeader>
+        <CardTitle className="font-headline text-xl">
+           <Link href={`/products/${product.slug}`} className="hover:underline">
+            {product.name}
+          </Link>
+        </CardTitle>
+        <CardDescription className="h-10">{product.description.substring(0, 60)}...</CardDescription>
+      </CardHeader>
       <CardContent className="flex-grow">
         <p className="text-2xl font-bold">Ksh {product.price.toFixed(2)}</p>
       </CardContent>

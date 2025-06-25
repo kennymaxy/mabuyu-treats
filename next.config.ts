@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'storage.googleapis.com',
+        pathname: '/maker-studio-project-images-prod/**',
       },
     ],
   },

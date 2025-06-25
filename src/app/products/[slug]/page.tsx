@@ -1,21 +1,17 @@
-'use client';
-
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { products } from '@/lib/products';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useCart } from '@/hooks/use-cart';
-import { ShoppingCart, Check, ShieldCheck } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import ProductAddToCart from '@/components/product/add-to-cart';
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
-  const { addToCart } = useCart();
   const product = products.find(p => p.slug === params.slug);
 
   if (!product) {
@@ -68,10 +64,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               </div>
 
               <div className="mt-8">
-                <Button size="lg" className="w-full sm:w-auto" onClick={() => addToCart(product)}>
-                  <ShoppingCart className="mr-2 h-5 w-5" />
-                  Add to Cart
-                </Button>
+                <ProductAddToCart product={product} />
               </div>
               
               <div className="mt-8">

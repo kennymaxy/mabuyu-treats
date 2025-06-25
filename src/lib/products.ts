@@ -29,8 +29,8 @@ export const products: Product[] = [
   },
   {
     id: '3',
-    name: 'Spicy Korosho (Cashews)',
-    slug: 'spicy-korosho',
+    name: 'Tasty Korosho (Cashews)',
+    slug: 'tasty-korosho',
     description:
       'Crunchy, premium cashews roasted to perfection and tossed in a signature blend of coastal spices. An addictive snack with a satisfying kick.',
     price: 200,

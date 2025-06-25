@@ -7,7 +7,7 @@ const testimonials = [
     avatar: 'AJ',
     image: 'https://placehold.co/100x100.png',
     title: 'Incredible Flavors!',
-    review: "The Spicy Korosho is my new addiction! I've never tasted cashews this good. The spice level is perfect and the quality is outstanding. Will be ordering again!",
+    review: "The Tasty Korosho is my new addiction! I've never tasted cashews this good. The spice level is perfect and the quality is outstanding. Will be ordering again!",
   },
   {
     name: 'Ben Carter',

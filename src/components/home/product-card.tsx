@@ -16,7 +16,7 @@ export default function ProductCard({ product, priority = false, ...props }: Pro
 
   return (
     <Card className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1" {...props}>
-      <Link href={`/products/${product.slug}`} className="group block overflow-hidden">
+      <Link href={`/products/${product.slug}`} className="group block overflow-hidden" target="_blank" rel="noopener noreferrer">
         <Image
           src={product.image}
           alt={product.name}
@@ -29,7 +29,7 @@ export default function ProductCard({ product, priority = false, ...props }: Pro
       </Link>
       <CardHeader>
         <CardTitle className="font-headline text-xl">
-           <Link href={`/products/${product.slug}`} className="hover:underline">
+           <Link href={`/products/${product.slug}`} className="hover:underline" target="_blank" rel="noopener noreferrer">
             {product.name}
           </Link>
         </CardTitle>

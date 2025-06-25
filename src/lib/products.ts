@@ -34,7 +34,7 @@ export const products: Product[] = [
     description:
       'Crunchy, premium cashews roasted to perfection and tossed in a signature blend of coastal spices. An addictive snack with a satisfying kick.',
     price: 12.99,
-    image: 'https://placehold.co/600x600.png',
+    image: 'https://storage.googleapis.com/maker-studio-project-images-prod/v1-36451631520-22c92bd1-b0e6-425b-80a9-25867990176d.jpg',
     imageHint: 'spiced cashews',
     ingredients: ['Cashews', 'Salt', 'Chili Powder', 'Lime', 'Paprika', 'Garlic Powder'],
     origin: 'Tanzania',

@@ -66,15 +66,6 @@ export default function CheckoutPage() {
               </form>
             </CardContent>
           </Card>
-           <Card className="mt-8">
-            <CardHeader>
-                <CardTitle>Payment</CardTitle>
-                <CardDescription>This is a simulated payment process.</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <p className="text-sm text-muted-foreground">In a real application, a secure payment form (like Stripe or PayPal) would be embedded here. For now, just click the button below to complete your order.</p>
-            </CardContent>
-           </Card>
         </div>
         <div>
           <Card>

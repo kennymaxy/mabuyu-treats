@@ -11,11 +11,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 export default function CheckoutPage() {
   const { cartItems, cartTotal } = useCart();
-  const [shippingCost, setShippingCost] = useState(50.00);
+  const [shippingCost, setShippingCost] = useState(100.00);
   
   const shippingOptions = [
     { label: "Pickup in Ngara (Free)", value: 0 },
-    { label: "Nairobi CBD", value: 50 },
+    { label: "Nairobi CBD", value: 100 },
     { label: "Nairobi Suburbs", value: 150 },
     { label: "Up-Country (Outside Nairobi)", value: 300 },
   ];

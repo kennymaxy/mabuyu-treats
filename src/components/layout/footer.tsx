@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="bg-secondary">
       <div className="container mx-auto py-8 px-4 md:px-6">
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-          <p className="text-sm text-secondary-foreground">
+          <p className="text-sm text-secondary-foreground" suppressHydrationWarning>
             &copy; {new Date().getFullYear()} Mabuyu Treats. All rights reserved.
           </p>
           <div className="flex items-center gap-4">

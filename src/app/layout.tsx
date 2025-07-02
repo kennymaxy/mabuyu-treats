@@ -33,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${lato.variable} scroll-smooth`} suppressHydrationWarning>
-      <body className="font-body antialiased">
+      <body className="font-body antialiased" suppressHydrationWarning>
         <CartProvider>
           <div className="flex min-h-screen flex-col">
             <Header />

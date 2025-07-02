@@ -21,7 +21,7 @@ export const products: Product[] = [
     description:
       'Dried mango slices coated in a sour and spicy achari masala. A popular tangy snack that packs a flavorful punch.',
     price: 50,
-    image: '/images/achari-mango.png',
+    image: '/images/achari.png',
     imageHint: 'spiced mango',
     ingredients: ['Dried Mango', 'Chili Powder', 'Salt', 'Spices', 'Citric Acid'],
     origin: 'South Asia',
@@ -34,7 +34,7 @@ export const products: Product[] = [
     description:
       'Crunchy, premium cashews roasted to perfection and tossed in a signature blend of coastal spices. An addictive snack with a satisfying kick.',
     price: 200,
-    image: '/images/tasty-korosho.png',
+    image: '/images/korosho.png',
     imageHint: 'spiced cashews',
     ingredients: ['Cashews', 'Salt', 'Chili Powder', 'Lime', 'Paprika', 'Garlic Powder'],
     origin: 'Tanzania',

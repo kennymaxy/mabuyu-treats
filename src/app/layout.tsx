@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${lato.variable} scroll-smooth`}>
+    <html lang="en" className={`${playfair.variable} ${lato.variable} scroll-smooth`} suppressHydrationWarning>
       <body className="font-body antialiased">
         <CartProvider>
           <div className="flex min-h-screen flex-col">

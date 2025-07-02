@@ -6,11 +6,20 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import { Truck } from 'lucide-react';
+import { useState } from 'react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export default function CheckoutPage() {
   const { cartItems, cartTotal } = useCart();
+  const [shippingCost, setShippingCost] = useState(50.00);
   
-  const shippingCost = 500.00;
+  const shippingOptions = [
+    { label: "Pickup in Ngara (Free)", value: 0 },
+    { label: "Nairobi CBD", value: 50 },
+    { label: "Nairobi Suburbs", value: 150 },
+    { label: "Up-Country (Outside Nairobi)", value: 300 },
+  ];
+
   const tax = cartTotal * 0.16; // Calculate 16% VAT for accounting
   const totalForCustomer = cartTotal + shippingCost; // Total shown to customer
   const totalForAccounting = cartTotal + shippingCost + tax; // Total for WhatsApp message
@@ -32,10 +41,12 @@ export default function CheckoutPage() {
       `- ${item.product.name} (Qty: ${item.quantity}) - Ksh ${(item.product.price * item.quantity).toFixed(2)}`
     ).join('\n');
 
+    const selectedShippingOption = shippingOptions.find(opt => opt.value === shippingCost);
+
     let message = `Hello Mabuyu Treats, I'd like to place an order:\n\n`;
     message += `${orderItems}\n\n`;
     message += `Subtotal: Ksh ${cartTotal.toFixed(2)}\n`;
-    message += `Shipping: Ksh ${shippingCost.toFixed(2)}\n`;
+    message += `Shipping (${selectedShippingOption?.label || 'N/A'}): Ksh ${shippingCost.toFixed(2)}\n`;
     message += `Taxes (16%): Ksh ${tax.toFixed(2)}\n`;
     message += `*Total: Ksh ${totalForAccounting.toFixed(2)}*\n\n`;
     message += `My shipping details:\n`;
@@ -128,10 +139,31 @@ export default function CheckoutPage() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-6 border-t pt-6 space-y-2">
-                <div className="flex justify-between"><span>Subtotal</span><span>Ksh {cartTotal.toFixed(2)}</span></div>
-                <div className="flex justify-between text-muted-foreground"><span>Shipping</span><span>Ksh {shippingCost.toFixed(2)}</span></div>
-                <div className="flex justify-between font-bold text-lg border-t pt-2 mt-2"><span>Total</span><span>Ksh {totalForCustomer.toFixed(2)}</span></div>
+              <div className="mt-6 border-t pt-6 space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="shipping-option">Shipping Option</Label>
+                  <Select
+                    onValueChange={(value) => setShippingCost(parseFloat(value))}
+                    defaultValue={shippingCost.toString()}
+                  >
+                    <SelectTrigger id="shipping-option" className="w-full">
+                      <SelectValue placeholder="Select delivery option" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {shippingOptions.map((option) => (
+                        <SelectItem key={option.label} value={option.value.toString()}>
+                          {`${option.label} - Ksh ${option.value.toFixed(2)}`}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                    <div className="flex justify-between"><span>Subtotal</span><span>Ksh {cartTotal.toFixed(2)}</span></div>
+                    <div className="flex justify-between text-muted-foreground"><span>Shipping</span><span>Ksh {shippingCost.toFixed(2)}</span></div>
+                    <div className="flex justify-between font-bold text-lg border-t pt-2 mt-2"><span>Total</span><span>Ksh {totalForCustomer.toFixed(2)}</span></div>
+                </div>
               </div>
             </CardContent>
             <CardFooter>

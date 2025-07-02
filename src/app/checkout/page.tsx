@@ -31,7 +31,6 @@ export default function CheckoutPage() {
   const { cartItems, cartTotal, clearCart } = useCart();
   const router = useRouter();
   const [shippingCost, setShippingCost] = useState(100.00);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
@@ -46,6 +45,8 @@ export default function CheckoutPage() {
     },
   });
 
+  const { formState: { isSubmitting } } = form;
+
   const shippingOptions = [
     { label: "Pickup in Ngara (Free)", value: 0 },
     { label: "Nairobi CBD", value: 100 },
@@ -58,8 +59,6 @@ export default function CheckoutPage() {
   const totalForAccounting = cartTotal + shippingCost + tax;
 
   const onSubmit = (data: CheckoutFormValues) => {
-    setIsSubmitting(true);
-
     const orderItems = cartItems.map(item => 
       `- ${item.product.name} (Qty: ${item.quantity}) - Ksh ${(item.product.price * item.quantity).toFixed(2)}`
     ).join('\n');
@@ -118,7 +117,7 @@ export default function CheckoutPage() {
             </CardHeader>
             <CardContent>
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <form id="checkout-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
@@ -267,7 +266,7 @@ export default function CheckoutPage() {
               </div>
             </CardContent>
             <CardFooter>
-               <Button type="submit" form="checkout-form" className="w-full bg-[#25D366] hover:bg-[#1DA851] text-white" size="lg" disabled={cartItems.length === 0 || isSubmitting} onClick={form.handleSubmit(onSubmit)}>
+               <Button type="submit" form="checkout-form" className="w-full bg-[#25D366] hover:bg-[#1DA851] text-white" size="lg" disabled={cartItems.length === 0 || isSubmitting}>
                 {isSubmitting ? (
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                 ) : (

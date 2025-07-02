@@ -7,7 +7,7 @@ export default function Hero() {
     <section className="relative w-full h-[60vh] md:h-[80vh] flex items-center justify-center text-center text-white overflow-hidden">
       <div className="absolute inset-0 bg-primary/30 z-10" />
       <Image
-        src="https://via.placeholder.com/1200x800.png"
+        src="/images/hero-background.png"
         alt="A vibrant spread of coastal spices and Swahili foods, representing a rich tradition of flavor"
         fill
         className="object-cover"

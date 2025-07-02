@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
-// The user-provided logo image will be uploaded and this URL will be replaced by the system.
-const logoUrl = "https://via.placeholder.com/129x45.png";
+// Assuming you have uploaded a logo.png to your public/images folder.
+const logoUrl = "/images/logo.png";
 
 export default function Logo() {
   return (
@@ -12,6 +12,7 @@ export default function Logo() {
       height={45}
       className="h-9 w-auto" // Control display size with tailwind
       priority
+      data-ai-hint="logo"
     />
   );
 }

@@ -8,7 +8,7 @@ export const products: Product[] = [
     description:
       'A sweet and tangy candy made from the seeds of the baobab fruit, coated in a vibrant, sugary layer. A beloved coastal delicacy, perfect for a burst of tropical flavor.',
     price: 50,
-    image: 'https://via.placeholder.com/600x600.png',
+    image: '/images/mabuyu.png',
     imageHint: 'baobab candy',
     ingredients: ['Baobab Seeds', 'Sugar', 'Food Coloring', 'Cardamom', 'Chili Powder (optional)'],
     origin: 'Coastal Kenya',
@@ -21,7 +21,7 @@ export const products: Product[] = [
     description:
       'Dried mango slices coated in a sour and spicy achari masala. A popular tangy snack that packs a flavorful punch.',
     price: 50,
-    image: 'https://via.placeholder.com/600x600.png',
+    image: '/images/achari-mango.png',
     imageHint: 'spiced mango',
     ingredients: ['Dried Mango', 'Chili Powder', 'Salt', 'Spices', 'Citric Acid'],
     origin: 'South Asia',
@@ -34,7 +34,7 @@ export const products: Product[] = [
     description:
       'Crunchy, premium cashews roasted to perfection and tossed in a signature blend of coastal spices. An addictive snack with a satisfying kick.',
     price: 200,
-    image: 'https://via.placeholder.com/600x600.png',
+    image: '/images/tasty-korosho.png',
     imageHint: 'spiced cashews',
     ingredients: ['Cashews', 'Salt', 'Chili Powder', 'Lime', 'Paprika', 'Garlic Powder'],
     origin: 'Tanzania',
@@ -47,7 +47,7 @@ export const products: Product[] = [
     description:
       'Creamy, rich, and utterly delicious butter made from stone-ground roasted cashews. A hint of sea salt makes it the perfect spread for toast, fruit, or just a spoonful.',
     price: 350,
-    image: 'https://via.placeholder.com/600x600.png',
+    image: '/images/korosho-butter.png',
     imageHint: 'cashew butter',
     ingredients: ['Roasted Cashews', 'Sea Salt'],
     origin: 'East Africa',

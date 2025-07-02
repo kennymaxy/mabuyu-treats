@@ -10,6 +10,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetClose,
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Input } from '../ui/input';
@@ -54,7 +55,9 @@ export default function CartSheet() {
                       <div>
                         <div className="flex justify-between text-base font-medium text-foreground">
                           <h3>
-                            <Link href={`/products/${item.product.slug}`}>{item.product.name}</Link>
+                            <SheetClose asChild>
+                              <Link href={`/products/${item.product.slug}`}>{item.product.name}</Link>
+                            </SheetClose>
                           </h3>
                           <p className="ml-4">Ksh {(item.product.price * item.quantity).toFixed(2)}</p>
                         </div>
@@ -93,9 +96,11 @@ export default function CartSheet() {
               </div>
               <p className="mt-0.5 text-sm text-muted-foreground">Shipping and taxes calculated at checkout.</p>
               <div className="mt-6">
-                <Button asChild className="w-full">
-                  <Link href="/checkout">Checkout</Link>
-                </Button>
+                <SheetClose asChild>
+                  <Button asChild className="w-full">
+                    <Link href="/checkout">Checkout</Link>
+                  </Button>
+                </SheetClose>
               </div>
               <div className="mt-6 flex justify-center text-center text-sm text-muted-foreground">
                 <p>

@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Star } from 'lucide-react';
 
 const testimonials = [
   {
@@ -8,6 +9,7 @@ const testimonials = [
     image: '/images/avatar-wanjiku.png',
     title: 'Incredible Flavors!',
     review: "The Tasty Korosho is my new addiction! I've never tasted cashews this good. The spice level is perfect and the quality is outstanding. Will be ordering again!",
+    rating: 5,
   },
   {
     name: 'Nasra A.',
@@ -15,6 +17,7 @@ const testimonials = [
     image: '/images/avatar-nasra.png',
     title: 'A Taste of Home',
     review: "Mabuyu Treats' Achari blend transported me right back to my grandmother's kitchen. It's authentic, aromatic, and has elevated my cooking immensely.",
+    rating: 5,
   },
   {
     name: 'Cherono T.',
@@ -22,6 +25,7 @@ const testimonials = [
     image: '/images/avatar-cherono.png',
     title: 'Absolutely Delicious',
     review: "The Korosho Butter is divine. It's so creamy and has just the right amount of salt. I put it on everything from toast to apple slices. Highly recommend!",
+    rating: 4,
   },
 ];
 
@@ -47,6 +51,14 @@ export default function Testimonials() {
                 </div>
               </CardHeader>
               <CardContent>
+                <div className="flex items-center gap-0.5 mb-2 text-primary">
+                  {Array.from({ length: testimonial.rating }).map((_, i) => (
+                    <Star key={`filled-${i}`} className="h-5 w-5" fill="currentColor" />
+                  ))}
+                  {Array.from({ length: 5 - testimonial.rating }).map((_, i) => (
+                    <Star key={`empty-${i}`} className="h-5 w-5 text-muted-foreground/50" />
+                  ))}
+                </div>
                 <p className="text-muted-foreground">&ldquo;{testimonial.review}&rdquo;</p>
               </CardContent>
             </Card>

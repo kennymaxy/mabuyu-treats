@@ -5,23 +5,53 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { Truck } from 'lucide-react';
 
 export default function CheckoutPage() {
-  const { cartItems, cartTotal, clearCart } = useCart();
-  const router = useRouter();
-
-  const handleCheckout = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real app, this would process payment
-    clearCart();
-    router.push('/checkout/success');
-  };
+  const { cartItems, cartTotal } = useCart();
   
   const shippingCost = 500.00;
   const tax = cartTotal * 0.08;
   const total = cartTotal + shippingCost + tax;
+
+  const handleCheckout = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const shippingInfo = {
+        firstName: formData.get('first-name') as string,
+        lastName: formData.get('last-name') as string,
+        address: formData.get('address') as string,
+        city: formData.get('city') as string,
+        zip: formData.get('zip') as string,
+        email: formData.get('email') as string,
+    };
+
+    const orderItems = cartItems.map(item => 
+      `- ${item.product.name} (Qty: ${item.quantity}) - Ksh ${(item.product.price * item.quantity).toFixed(2)}`
+    ).join('\n');
+
+    let message = `Hello Mabuyu Treats, I'd like to place an order:\n\n`;
+    message += `${orderItems}\n\n`;
+    message += `Subtotal: Ksh ${cartTotal.toFixed(2)}\n`;
+    message += `Shipping: Ksh ${shippingCost.toFixed(2)}\n`;
+    message += `Taxes: Ksh ${tax.toFixed(2)}\n`;
+    message += `*Total: Ksh ${total.toFixed(2)}*\n\n`;
+    message += `My shipping details:\n`;
+    message += `Name: ${shippingInfo.firstName} ${shippingInfo.lastName}\n`;
+    message += `Address: ${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.zip}\n`;
+    message += `Email: ${shippingInfo.email}\n\n`;
+    message += `Please confirm my order. Thank you!`;
+
+    const encodedMessage = encodeURIComponent(message);
+    
+    // IMPORTANT: Replace this with your actual WhatsApp number
+    const phoneNumber = '254112061033'; 
+    
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
+  };
 
   return (
     <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 fade-in">
@@ -48,30 +78,30 @@ export default function CheckoutPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="first-name">First Name</Label>
-                    <Input id="first-name" placeholder="John" required />
+                    <Input id="first-name" name="first-name" placeholder="John" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="last-name">Last Name</Label>
-                    <Input id="last-name" placeholder="Doe" required />
+                    <Input id="last-name" name="last-name" placeholder="Doe" required />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="address">Address</Label>
-                  <Input id="address" placeholder="123 Spice Lane" required />
+                  <Input id="address" name="address" placeholder="123 Spice Lane" required />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                    <div className="space-y-2 sm:col-span-2">
                     <Label htmlFor="city">City</Label>
-                    <Input id="city" placeholder="Flavor Town" required />
+                    <Input id="city" name="city" placeholder="Flavor Town" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="zip">ZIP Code</Label>
-                    <Input id="zip" placeholder="12345" required />
+                    <Input id="zip" name="zip" placeholder="12345" required />
                   </div>
                 </div>
                 <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" placeholder="you@example.com" required />
+                    <Input id="email" name="email" type="email" placeholder="you@example.com" required />
                 </div>
               </form>
             </CardContent>
@@ -105,8 +135,22 @@ export default function CheckoutPage() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button type="submit" form="checkout-form" className="w-full" size="lg" disabled={cartItems.length === 0}>
-                Place Order
+               <Button type="submit" form="checkout-form" className="w-full bg-[#25D366] hover:bg-[#1DA851] text-white" size="lg" disabled={cartItems.length === 0}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="mr-2 h-5 w-5"
+                >
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                Place Order on WhatsApp
               </Button>
             </CardFooter>
           </Card>

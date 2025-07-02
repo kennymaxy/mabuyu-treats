@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { Truck } from 'lucide-react';
 import { useState } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
 export default function CheckoutPage() {
   const { cartItems, cartTotal } = useCart();
@@ -33,6 +34,9 @@ export default function CheckoutPage() {
         lastName: formData.get('last-name') as string,
         address: formData.get('address') as string,
         city: formData.get('city') as string,
+        apartment: formData.get('apartment') as string,
+        houseNumber: formData.get('house-number') as string,
+        deliveryInstructions: formData.get('delivery-instructions') as string,
     };
 
     const orderItems = cartItems.map(item => 
@@ -49,8 +53,17 @@ export default function CheckoutPage() {
     message += `*Total: Ksh ${totalForAccounting.toFixed(2)}*\n\n`;
     message += `My shipping details:\n`;
     message += `Name: ${shippingInfo.firstName} ${shippingInfo.lastName}\n`;
-    message += `Address: ${shippingInfo.address}, ${shippingInfo.city}\n\n`;
-    message += `Please confirm my order. Thank you!`;
+    message += `Address: ${shippingInfo.address}, ${shippingInfo.city}\n`;
+    if (shippingInfo.apartment) {
+      message += `Apartment: ${shippingInfo.apartment}\n`;
+    }
+    if (shippingInfo.houseNumber) {
+      message += `House No: ${shippingInfo.houseNumber}\n`;
+    }
+    if (shippingInfo.deliveryInstructions) {
+      message += `Instructions: ${shippingInfo.deliveryInstructions}\n`;
+    }
+    message += `\nPlease confirm my order. Thank you!`;
 
     const encodedMessage = encodeURIComponent(message);
     
@@ -95,12 +108,26 @@ export default function CheckoutPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="address">Address</Label>
+                  <Label htmlFor="address">Address / Street</Label>
                   <Input id="address" name="address" placeholder="123 Spice Lane" required />
+                </div>
+                 <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="apartment">Apartment Name</Label>
+                        <Input id="apartment" name="apartment" placeholder="Spice Towers" />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="house-number">House Number</Label>
+                        <Input id="house-number" name="house-number" placeholder="Apt 4B" />
+                    </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="city">City</Label>
                   <Input id="city" name="city" placeholder="Flavor Town" required />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="delivery-instructions">Delivery Instructions</Label>
+                  <Textarea id="delivery-instructions" name="delivery-instructions" placeholder="E.g. Leave at the reception with the guard." />
                 </div>
               </form>
             </CardContent>

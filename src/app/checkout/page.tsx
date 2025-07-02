@@ -9,9 +9,11 @@ import { Truck } from 'lucide-react';
 import { useState } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { useRouter } from 'next/navigation';
 
 export default function CheckoutPage() {
-  const { cartItems, cartTotal } = useCart();
+  const { cartItems, cartTotal, clearCart } = useCart();
+  const router = useRouter();
   const [shippingCost, setShippingCost] = useState(100.00);
   
   const shippingOptions = [
@@ -73,6 +75,9 @@ export default function CheckoutPage() {
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
     
     window.open(whatsappUrl, '_blank');
+    
+    clearCart();
+    router.push('/checkout/success');
   };
 
   return (

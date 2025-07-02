@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 // The user-provided logo image will be uploaded and this URL will be replaced by the system.
-const logoUrl = "https://placehold.co/129x45.png";
+const logoUrl = "https://via.placeholder.com/129x45.png";
 
 export default function Logo() {
   return (

@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { Truck } from 'lucide-react';
 
 export default function CheckoutPage() {
   const { cartItems, cartTotal, clearCart } = useCart();
@@ -27,6 +28,15 @@ export default function CheckoutPage() {
        <div className="text-center mb-10">
           <h1 className="text-3xl font-bold font-headline sm:text-4xl">Checkout</h1>
         </div>
+        <Card className="mb-8 bg-secondary/50 border-primary/20">
+            <CardHeader className="flex-row items-center gap-4">
+                <Truck className="h-8 w-8 text-primary" />
+                <div>
+                    <CardTitle>Pickup Available</CardTitle>
+                    <CardDescription>Pickup in Ngara at Fabric movie shop</CardDescription>
+                </div>
+            </CardHeader>
+        </Card>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div>
           <Card>

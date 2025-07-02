@@ -11,8 +11,9 @@ export default function CheckoutPage() {
   const { cartItems, cartTotal } = useCart();
   
   const shippingCost = 500.00;
-  const tax = cartTotal * 0.08;
-  const total = cartTotal + shippingCost + tax;
+  const tax = cartTotal * 0.16; // Calculate 16% VAT for accounting
+  const totalForCustomer = cartTotal + shippingCost; // Total shown to customer
+  const totalForAccounting = cartTotal + shippingCost + tax; // Total for WhatsApp message
 
   const handleCheckout = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,8 +36,8 @@ export default function CheckoutPage() {
     message += `${orderItems}\n\n`;
     message += `Subtotal: Ksh ${cartTotal.toFixed(2)}\n`;
     message += `Shipping: Ksh ${shippingCost.toFixed(2)}\n`;
-    message += `Taxes: Ksh ${tax.toFixed(2)}\n`;
-    message += `*Total: Ksh ${total.toFixed(2)}*\n\n`;
+    message += `Taxes (16%): Ksh ${tax.toFixed(2)}\n`;
+    message += `*Total: Ksh ${totalForAccounting.toFixed(2)}*\n\n`;
     message += `My shipping details:\n`;
     message += `Name: ${shippingInfo.firstName} ${shippingInfo.lastName}\n`;
     message += `Address: ${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.zip}\n`;
@@ -130,8 +131,7 @@ export default function CheckoutPage() {
               <div className="mt-6 border-t pt-6 space-y-2">
                 <div className="flex justify-between"><span>Subtotal</span><span>Ksh {cartTotal.toFixed(2)}</span></div>
                 <div className="flex justify-between text-muted-foreground"><span>Shipping</span><span>Ksh {shippingCost.toFixed(2)}</span></div>
-                <div className="flex justify-between text-muted-foreground"><span>Taxes</span><span>Ksh {tax.toFixed(2)}</span></div>
-                <div className="flex justify-between font-bold text-lg border-t pt-2 mt-2"><span>Total</span><span>Ksh {total.toFixed(2)}</span></div>
+                <div className="flex justify-between font-bold text-lg border-t pt-2 mt-2"><span>Total</span><span>Ksh {totalForCustomer.toFixed(2)}</span></div>
               </div>
             </CardContent>
             <CardFooter>

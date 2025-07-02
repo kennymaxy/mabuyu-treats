@@ -122,8 +122,8 @@ export default function CheckoutPage() {
                     </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="city">City</Label>
-                  <Input id="city" name="city" placeholder="Flavor Town" required />
+                  <Label htmlFor="city">Town</Label>
+                  <Input id="city" name="city" placeholder="e.g. Nairobi" required />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="delivery-instructions">Delivery Instructions</Label>

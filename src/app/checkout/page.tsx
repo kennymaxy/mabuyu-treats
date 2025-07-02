@@ -33,8 +33,6 @@ export default function CheckoutPage() {
         lastName: formData.get('last-name') as string,
         address: formData.get('address') as string,
         city: formData.get('city') as string,
-        zip: formData.get('zip') as string,
-        email: formData.get('email') as string,
     };
 
     const orderItems = cartItems.map(item => 
@@ -51,8 +49,7 @@ export default function CheckoutPage() {
     message += `*Total: Ksh ${totalForAccounting.toFixed(2)}*\n\n`;
     message += `My shipping details:\n`;
     message += `Name: ${shippingInfo.firstName} ${shippingInfo.lastName}\n`;
-    message += `Address: ${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.zip}\n`;
-    message += `Email: ${shippingInfo.email}\n\n`;
+    message += `Address: ${shippingInfo.address}, ${shippingInfo.city}\n\n`;
     message += `Please confirm my order. Thank you!`;
 
     const encodedMessage = encodeURIComponent(message);
@@ -101,19 +98,9 @@ export default function CheckoutPage() {
                   <Label htmlFor="address">Address</Label>
                   <Input id="address" name="address" placeholder="123 Spice Lane" required />
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                   <div className="space-y-2 sm:col-span-2">
-                    <Label htmlFor="city">City</Label>
-                    <Input id="city" name="city" placeholder="Flavor Town" required />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="zip">ZIP Code</Label>
-                    <Input id="zip" name="zip" placeholder="12345" required />
-                  </div>
-                </div>
                 <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" name="email" type="email" placeholder="you@example.com" required />
+                  <Label htmlFor="city">City</Label>
+                  <Input id="city" name="city" placeholder="Flavor Town" required />
                 </div>
               </form>
             </CardContent>

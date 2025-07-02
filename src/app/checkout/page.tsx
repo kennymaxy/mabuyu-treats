@@ -46,7 +46,7 @@ export default function CheckoutPage() {
     const encodedMessage = encodeURIComponent(message);
     
     // IMPORTANT: Replace this with your actual WhatsApp number
-    const phoneNumber = '254112061033'; 
+    const phoneNumber = '254713022208'; 
     
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
     

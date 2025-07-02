@@ -5,17 +5,47 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
-import { Truck } from 'lucide-react';
+import { Loader2, Truck } from 'lucide-react';
 import { useState } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+
+const checkoutSchema = z.object({
+  firstName: z.string().min(1, 'First name is required'),
+  lastName: z.string().min(1, 'Last name is required'),
+  address: z.string().min(1, 'Address is required'),
+  city: z.string().min(1, 'Town is required'),
+  apartment: z.string().optional(),
+  houseNumber: z.string().optional(),
+  deliveryInstructions: z.string().optional(),
+});
+
+type CheckoutFormValues = z.infer<typeof checkoutSchema>;
 
 export default function CheckoutPage() {
   const { cartItems, cartTotal, clearCart } = useCart();
   const router = useRouter();
   const [shippingCost, setShippingCost] = useState(100.00);
-  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const form = useForm<CheckoutFormValues>({
+    resolver: zodResolver(checkoutSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      address: '',
+      city: '',
+      apartment: '',
+      houseNumber: '',
+      deliveryInstructions: '',
+    },
+  });
+
   const shippingOptions = [
     { label: "Pickup in Ngara (Free)", value: 0 },
     { label: "Nairobi CBD", value: 100 },
@@ -23,23 +53,12 @@ export default function CheckoutPage() {
     { label: "Up-Country (Outside Nairobi)", value: 300 },
   ];
 
-  const tax = cartTotal * 0.16; // Calculate 16% VAT for accounting
-  const totalForCustomer = cartTotal + shippingCost; // Total shown to customer
-  const totalForAccounting = cartTotal + shippingCost + tax; // Total for WhatsApp message
+  const tax = cartTotal * 0.16;
+  const totalForCustomer = cartTotal + shippingCost;
+  const totalForAccounting = cartTotal + shippingCost + tax;
 
-  const handleCheckout = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const shippingInfo = {
-        firstName: formData.get('first-name') as string,
-        lastName: formData.get('last-name') as string,
-        address: formData.get('address') as string,
-        city: formData.get('city') as string,
-        apartment: formData.get('apartment') as string,
-        houseNumber: formData.get('house-number') as string,
-        deliveryInstructions: formData.get('delivery-instructions') as string,
-    };
+  const onSubmit = (data: CheckoutFormValues) => {
+    setIsSubmitting(true);
 
     const orderItems = cartItems.map(item => 
       `- ${item.product.name} (Qty: ${item.quantity}) - Ksh ${(item.product.price * item.quantity).toFixed(2)}`
@@ -54,24 +73,21 @@ export default function CheckoutPage() {
     message += `Taxes (16%): Ksh ${tax.toFixed(2)}\n`;
     message += `*Total: Ksh ${totalForAccounting.toFixed(2)}*\n\n`;
     message += `My shipping details:\n`;
-    message += `Name: ${shippingInfo.firstName} ${shippingInfo.lastName}\n`;
-    message += `Address: ${shippingInfo.address}, ${shippingInfo.city}\n`;
-    if (shippingInfo.apartment) {
-      message += `Apartment: ${shippingInfo.apartment}\n`;
+    message += `Name: ${data.firstName} ${data.lastName}\n`;
+    message += `Address: ${data.address}, ${data.city}\n`;
+    if (data.apartment) {
+      message += `Apartment: ${data.apartment}\n`;
     }
-    if (shippingInfo.houseNumber) {
-      message += `House No: ${shippingInfo.houseNumber}\n`;
+    if (data.houseNumber) {
+      message += `House No: ${data.houseNumber}\n`;
     }
-    if (shippingInfo.deliveryInstructions) {
-      message += `Instructions: ${shippingInfo.deliveryInstructions}\n`;
+    if (data.deliveryInstructions) {
+      message += `Instructions: ${data.deliveryInstructions}\n`;
     }
     message += `\nPlease confirm my order. Thank you!`;
 
     const encodedMessage = encodeURIComponent(message);
-    
-    // IMPORTANT: Replace this with your actual WhatsApp number
     const phoneNumber = '254713022208'; 
-    
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
     
     window.open(whatsappUrl, '_blank');
@@ -101,40 +117,105 @@ export default function CheckoutPage() {
               <CardTitle>Shipping Information</CardTitle>
             </CardHeader>
             <CardContent>
-              <form id="checkout-form" onSubmit={handleCheckout} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="first-name">First Name</Label>
-                    <Input id="first-name" name="first-name" placeholder="John" required />
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="firstName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>First Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="John" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="lastName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Last Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Doe" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="last-name">Last Name</Label>
-                    <Input id="last-name" name="last-name" placeholder="Doe" required />
+                  <FormField
+                    control={form.control}
+                    name="address"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Address / Street</FormLabel>
+                        <FormControl>
+                          <Input placeholder="123 Spice Lane" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="apartment"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Apartment Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Spice Towers" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="houseNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>House Number</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Apt 4B" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="address">Address / Street</Label>
-                  <Input id="address" name="address" placeholder="123 Spice Lane" required />
-                </div>
-                 <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="apartment">Apartment Name</Label>
-                        <Input id="apartment" name="apartment" placeholder="Spice Towers" />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="house-number">House Number</Label>
-                        <Input id="house-number" name="house-number" placeholder="Apt 4B" />
-                    </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="city">Town</Label>
-                  <Input id="city" name="city" placeholder="e.g. Nairobi" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="delivery-instructions">Delivery Instructions</Label>
-                  <Textarea id="delivery-instructions" name="delivery-instructions" placeholder="E.g. Leave at the reception with the guard." />
-                </div>
-              </form>
+                  <FormField
+                    control={form.control}
+                    name="city"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Town</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g. Nairobi" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="deliveryInstructions"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Delivery Instructions</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="E.g. Leave at the reception with the guard." {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </form>
+              </Form>
             </CardContent>
           </Card>
         </div>
@@ -186,22 +267,26 @@ export default function CheckoutPage() {
               </div>
             </CardContent>
             <CardFooter>
-               <Button type="submit" form="checkout-form" className="w-full bg-[#25D366] hover:bg-[#1DA851] text-white" size="lg" disabled={cartItems.length === 0}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="mr-2 h-5 w-5"
-                >
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                </svg>
-                Place Order on WhatsApp
+               <Button type="submit" form="checkout-form" className="w-full bg-[#25D366] hover:bg-[#1DA851] text-white" size="lg" disabled={cartItems.length === 0 || isSubmitting} onClick={form.handleSubmit(onSubmit)}>
+                {isSubmitting ? (
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="mr-2 h-5 w-5"
+                  >
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                  </svg>
+                )}
+                {isSubmitting ? 'Placing Order...' : 'Place Order on WhatsApp'}
               </Button>
             </CardFooter>
           </Card>

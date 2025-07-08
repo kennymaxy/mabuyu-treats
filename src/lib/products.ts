@@ -24,7 +24,7 @@ export const products: Product[] = [
     image: '/images/achari.png',
     imageHint: 'spiced mango',
     ingredients: ['Dried Mango', 'Chili Powder', 'Salt', 'Spices', 'Citric Acid'],
-    origin: 'South Asia',
+    origin: 'Coastal Kenya',
     spiceLevel: 'Medium',
   },
   {
@@ -36,9 +36,9 @@ export const products: Product[] = [
     price: 200,
     image: '/images/korosho.png',
     imageHint: 'spiced cashews',
-    ingredients: ['Cashews', 'Salt', 'Chili Powder', 'Lime', 'Paprika', 'Garlic Powder'],
-    origin: 'Tanzania',
-    spiceLevel: 'Hot',
+    ingredients: ['Cashews', 'Salt', 'Lime', 'Paprika', 'Garlic Powder'],
+    origin: 'Coastal Kenya',
+    spiceLevel: 'Salted',
   },
   {
     id: '4',
@@ -50,7 +50,7 @@ export const products: Product[] = [
     image: '/images/korosho-butter.png',
     imageHint: 'cashew butter',
     ingredients: ['Roasted Cashews', 'Sea Salt'],
-    origin: 'East Africa',
-    spiceLevel: 'Mild',
+    origin: 'Coastal Kenya',
+    spiceLevel: 'Sweet',
   },
 ];

@@ -12,7 +12,7 @@ export const products: Product[] = [
     imageHint: 'baobab candy',
     ingredients: ['Baobab Seeds', 'Sugar', 'Food Coloring', 'Cardamom', 'Chili Powder (optional)'],
     origin: 'Coastal Kenya',
-    spiceLevel: 'Mild',
+    spiceLevel: 'Sweet/Hot/Mild',
   },
   {
     id: '2',
@@ -25,7 +25,7 @@ export const products: Product[] = [
     imageHint: 'spiced mango',
     ingredients: ['Dried Mango', 'Chili Powder', 'Salt', 'Spices', 'Citric Acid'],
     origin: 'Coastal Kenya',
-    spiceLevel: 'Medium',
+    spiceLevel: 'Sweet and sour',
   },
   {
     id: '3',
@@ -36,9 +36,9 @@ export const products: Product[] = [
     price: 200,
     image: '/images/korosho.png',
     imageHint: 'spiced cashews',
-    ingredients: ['Cashews', 'Salt', 'Lime', 'Paprika', 'Garlic Powder'],
+    ingredients: ['Cashews', 'Salt', 'Chili Powder', 'Lime', 'Paprika', 'Garlic Powder'],
     origin: 'Coastal Kenya',
-    spiceLevel: 'Salted',
+    spiceLevel: 'Salty',
   },
   {
     id: '4',

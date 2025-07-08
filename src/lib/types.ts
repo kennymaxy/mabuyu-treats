@@ -8,7 +8,7 @@ export interface Product {
   imageHint: string;
   ingredients: string[];
   origin: string;
-  spiceLevel: 'Mild' | 'Medium' | 'Hot';
+  spiceLevel: 'Hot' | 'Mild';
 }
 
 export interface CartItem {

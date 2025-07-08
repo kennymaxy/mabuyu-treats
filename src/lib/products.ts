@@ -20,7 +20,7 @@ export const products: Product[] = [
     slug: 'achari-mango',
     description:
       'Dried mango slices coated in a sour and spicy achari masala. A popular tangy snack that packs a flavorful punch.',
-    price: 100,
+    price: 50,
     image: '/images/achari.png',
     imageHint: 'spiced mango',
     ingredients: ['Dried Mango', 'Chili Powder', 'Salt', 'Spices', 'Citric Acid'],

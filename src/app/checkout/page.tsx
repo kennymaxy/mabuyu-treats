@@ -105,7 +105,7 @@ export default function CheckoutPage() {
                 <Truck className="h-8 w-8 text-primary" />
                 <div>
                     <CardTitle>Pickup Available</CardTitle>
-                    <CardDescription>Pickup in Ngara at Fabric movie shop</CardDescription>
+                    <CardDescription>Pickup in Kihwa Business Centre near Equity Bank Ngara at Fabric movie shop no.G9 </CardDescription>
                 </div>
             </CardHeader>
         </Card>

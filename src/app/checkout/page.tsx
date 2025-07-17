@@ -1,3 +1,4 @@
+
 'use client';
 import { useCart } from '@/hooks/use-cart';
 import { Button } from '@/components/ui/button';
@@ -5,9 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
-import { Loader2, Truck } from 'lucide-react';
+import { Loader2, Truck, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -30,8 +30,7 @@ type CheckoutFormValues = z.infer<typeof checkoutSchema>;
 export default function CheckoutPage() {
   const { cartItems, cartTotal, clearCart } = useCart();
   const router = useRouter();
-  const [shippingCost, setShippingCost] = useState(100.00);
-
+  
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
@@ -47,30 +46,21 @@ export default function CheckoutPage() {
 
   const { formState: { isSubmitting } } = form;
 
-  const shippingOptions = [
-    { label: "Pickup in Ngara (Free)", value: 0 },
-    { label: "Nairobi CBD", value: 100 },
-    { label: "Nairobi Suburbs", value: 150 },
-    { label: "Up-Country (Outside Nairobi)", value: 300 },
-  ];
-
   const tax = cartTotal * 0.16;
-  const totalForCustomer = cartTotal + shippingCost;
-  const totalForAccounting = cartTotal + shippingCost + tax;
+  const totalForCustomer = cartTotal;
+  const totalForAccounting = cartTotal + tax;
 
   const onSubmit = (data: CheckoutFormValues) => {
     const orderItems = cartItems.map(item => 
       `- ${item.product.name} (Qty: ${item.quantity}) - Ksh ${(item.product.price * item.quantity).toFixed(2)}`
     ).join('\n');
 
-    const selectedShippingOption = shippingOptions.find(opt => opt.value === shippingCost);
-
     let message = `Hello Mabuyu Treats, I'd like to place an order:\n\n`;
     message += `${orderItems}\n\n`;
     message += `Subtotal: Ksh ${cartTotal.toFixed(2)}\n`;
-    message += `Shipping (${selectedShippingOption?.label || 'N/A'}): Ksh ${shippingCost.toFixed(2)}\n`;
+    message += `Shipping: TBD with rider\n`;
     message += `Taxes (16%): Ksh ${tax.toFixed(2)}\n`;
-    message += `*Total: Ksh ${totalForAccounting.toFixed(2)}*\n\n`;
+    message += `*Total (excluding delivery): Ksh ${totalForCustomer.toFixed(2)}*\n\n`;
     message += `My shipping details:\n`;
     message += `Name: ${data.firstName} ${data.lastName}\n`;
     message += `Address: ${data.address}, ${data.city}\n`;
@@ -100,16 +90,7 @@ export default function CheckoutPage() {
        <div className="text-center mb-10">
           <h1 className="text-3xl font-bold font-headline sm:text-4xl">Checkout</h1>
         </div>
-        <Card className="mb-8 bg-secondary/50 border-primary/20">
-            <CardHeader className="flex-row items-center gap-4">
-                <Truck className="h-8 w-8 text-primary" />
-                <div>
-                    <CardTitle>Pickup Available</CardTitle>
-                    <CardDescription>Pickup in Kihwa Business Centre near Equity Bank Ngara at Fabric movie shop no.G9 </CardDescription>
-                </div>
-            </CardHeader>
-        </Card>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div>
           <Card>
             <CardHeader>
@@ -239,29 +220,22 @@ export default function CheckoutPage() {
                 ))}
               </ul>
               <div className="mt-6 border-t pt-6 space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="shipping-option">Shipping Option</Label>
-                  <Select
-                    onValueChange={(value) => setShippingCost(parseFloat(value))}
-                    defaultValue={shippingCost.toString()}
-                  >
-                    <SelectTrigger id="shipping-option" className="w-full">
-                      <SelectValue placeholder="Select delivery option" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {shippingOptions.map((option) => (
-                        <SelectItem key={option.label} value={option.value.toString()}>
-                          {`${option.label} - Ksh ${option.value.toFixed(2)}`}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                <Card className="bg-secondary/50 border-primary/20">
+                    <CardHeader className="flex-row items-start gap-4 p-4">
+                        <Truck className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                        <div>
+                            <CardTitle className="text-base">Delivery Instructions</CardTitle>
+                            <CardDescription className="text-sm">
+                              Please note that delivery is paid to the rider, as per the agreement between the client and the rider.
+                            </CardDescription>
+                        </div>
+                    </CardHeader>
+                </Card>
 
-                <div className="space-y-2">
+                <div className="space-y-2 pt-4">
                     <div className="flex justify-between"><span>Subtotal</span><span>Ksh {cartTotal.toFixed(2)}</span></div>
-                    <div className="flex justify-between text-muted-foreground"><span>Shipping</span><span>Ksh {shippingCost.toFixed(2)}</span></div>
-                    <div className="flex justify-between font-bold text-lg border-t pt-2 mt-2"><span>Total</span><span>Ksh {totalForCustomer.toFixed(2)}</span></div>
+                    <div className="flex justify-between text-muted-foreground"><span>Shipping</span><span>Paid to rider</span></div>
+                    <div className="flex justify-between font-bold text-lg border-t pt-2 mt-2"><span>Total (Excl. Delivery)</span><span>Ksh {totalForCustomer.toFixed(2)}</span></div>
                 </div>
               </div>
             </CardContent>

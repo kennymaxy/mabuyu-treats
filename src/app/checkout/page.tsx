@@ -226,7 +226,8 @@ export default function CheckoutPage() {
                         <div>
                             <CardTitle className="text-base">Delivery Instructions</CardTitle>
                             <CardDescription className="text-sm">
-                              Please note that delivery is paid to the rider, as per the agreement between the client and the rider.</br>
+                              Please note that delivery is paid to the rider, as per the agreement between the client and the rider.
+                              
                               Pick up shop: Kihwa Business Centre near Equity Bank Ngara, shop no.G9
                             </CardDescription>
                         </div>

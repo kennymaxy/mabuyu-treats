@@ -14,7 +14,7 @@ export const products: Product[] = [
     origin: 'Coastal Kenya',
     spiceLevel: 'Sweet/Hot/Mild',
     reviews: [
-      { id: 'r1', name: 'Stephanie Opiyo', rating: 5, comment: "Absolutely addictive! The perfect mix of sweet and sour.", date: '2024-06-15' },
+      { id: 'r1', name: 'Stephanie Opiyo', rating: 5, comment: "Absolutely addictive! Achari she says they are very good and so sweet.", date: '2024-06-15' },
       { id: 'r2', name: 'Grace Mugo', rating: 5, comment: "Reminds me of my childhood in Mombasa. They are really good.", date: '2024-06-12' },
       { id: 'r3', name: 'Emma Paul', rating: 5, comment: "They are really good and sweet.", date: '2024-06-12' },
     ],
